@@ -19,4 +19,7 @@
 	<name>Git Cloud</name>
 	<description>Manage all your Git repositories, organisations, providers from one place.</description>
 	
+	<modules>
+		<module>docs</module>
+	</modules>
 </project>
