@@ -39,7 +39,7 @@ tests-backend:
 run: run-backend # alias for quick access
 run-backend: 
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	false
+	${MVN} -f modules/core clean spring-boot:run
 
 .PHONY: build-backend #: Build backend app.
 build: build-backend # alias for quick access
