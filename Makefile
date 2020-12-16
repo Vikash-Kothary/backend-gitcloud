@@ -59,6 +59,12 @@ init-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
 	${MVN} initialize
 
+.PHONY: open-backend
+open: open-backend
+open-backend:
+	@cd ${GITCLOUD_BACKEND_PATH} && \
+	${OPEN} ${GITCLOUD_URL}
+
 .PHONY: clean-backend #: Clean project build files.
 clean: clean-backend # alias for quick access
 clean-backend:
