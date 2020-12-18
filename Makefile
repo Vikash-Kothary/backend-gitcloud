@@ -33,7 +33,7 @@ lint-backend:
 tests: tests-backend # alias for quick access
 tests-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	false
+	${MVN} clean test
 
 .PHONY: run-backend #: Run backend app.
 run: run-backend # alias for quick access
