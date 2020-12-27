@@ -1,5 +1,7 @@
 package com.vikashkothary.gitcloud.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vikashkothary.gitcloud.model.EmptyJsonResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,19 +20,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class IndexControllerTest {
+public class ProjectsControllerTest {
+
+    private static final String API_PROJECTS_ENDPOINT = "/api/v1/projects";
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     public void getHello() throws Exception {
-        final String expectedResponse = "Hello Git Cloud";
+        final String expectedResponse = "{}";
 
-        mockMvc.perform(get("/api/v1")
+        mockMvc.perform(get(API_PROJECTS_ENDPOINT)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo(expectedResponse)));
-
     }
 }
