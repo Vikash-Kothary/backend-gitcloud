@@ -1,0 +1,62 @@
+---
+image: maven:3.6.3-jdk-11
+
+variables:
+  ENV: ci
+  CI: "true"
+  MVN: mvn
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - ~/.m2/repository
+
+stages:
+  - clean
+  - lint
+  - tests
+  - build
+  - release
+  - package
+  - deploy
+
+before_script:
+  - make help-backend
+  - echo
+  - make init-backend
+
+# lint:
+#   stage: lint
+#   script:
+#     - make lint-backend
+
+tests:
+  stage: tests
+  script:
+    - make tests-backend
+
+# build:
+#   stage: build
+#   script:
+#     - make build-backend
+
+# release:
+#   stage: release
+#   script:
+#     - make release-backend
+#   only:
+#     - develop
+
+# package:
+#   stage: package
+#   script:
+#     - make package-backend
+#   only:
+#     - develop
+
+# deploy:
+#   stage: deploy
+#   script:
+#     - make deploy-backend
+#   only:
+#     - develop
