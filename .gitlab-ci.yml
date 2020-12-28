@@ -21,6 +21,9 @@ stages:
   - deploy
 
 before_script:
+  # TODO: use docker image with make preinstalled.
+  - apt update && apt install build-essential -y
+  - echo
   - make help-backend
   - echo
   - make init-backend
