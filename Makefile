@@ -50,8 +50,8 @@ build-backend:
 # Run scripts using make
 %:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	test -f "scripts/${*}.sh" && \
-	${SHELL} "scripts/${*}.sh"
+	if [[ -f "scripts/${*}.sh" ]]; then \
+	${SHELL} "scripts/${*}.sh"; fi
 
 .PHONY: init-backend #: Download project dependencies.
 init: init-backend # alias for quick access
