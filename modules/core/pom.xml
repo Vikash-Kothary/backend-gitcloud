@@ -11,7 +11,7 @@
 
     <groupId>com.vikashkothary</groupId>
     <artifactId>gitcloud-core</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <name>Git Cloud - Core</name>
     <description>Core module for Git Cloud.</description>
