@@ -40,12 +40,6 @@ run: run-backend # alias for quick access
 run-backend: 
 	@cd ${GITCLOUD_BACKEND_PATH} && \
 	${MVN} -pl core spring-boot:run
-
-.PHONY: build-backend #: Build backend app.
-build: build-backend # alias for quick access
-build-backend: 
-	@cd ${GITCLOUD_BACKEND_PATH} && \
-	false
 	
 # Run scripts using make
 %:
@@ -58,6 +52,30 @@ init: init-backend # alias for quick access
 init-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
 	${MVN} initialize dependency:go-offline
+
+.PHONY: build-backend #: Build backend app.
+build: build-backend # alias for quick access
+build-backend: 
+	@cd ${GITCLOUD_BACKEND_PATH} && \
+	${MVN} package
+
+.PHONY: release-backend
+release: release-backend
+release-backend:
+	@cd ${GITCLOUD_BACKEND_PATH} && \
+	${SHELL} scripts/release-backend.sh
+
+.PHONY: package-backend
+package: package-backend
+package-backend:
+	@cd ${GITCLOUD_BACKEND_PATH} && \
+	${SHELL} scripts/package-backend.sh
+
+.PHONY: deploy-backend
+deploy: deploy-backend
+deploy-backend:
+	@cd ${GITCLOUD_BACKEND_PATH} && \
+	${SHELL} scripts/deploy-backend.sh
 
 .PHONY: open-backend
 open: open-backend
