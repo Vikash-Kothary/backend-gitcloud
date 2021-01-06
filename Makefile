@@ -57,7 +57,7 @@ build-backend:
 init: init-backend # alias for quick access
 init-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} initialize
+	${MVN} initialize dependency:go-offline
 
 .PHONY: open-backend
 open: open-backend
