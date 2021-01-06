@@ -21,7 +21,7 @@ help-backend:
 docs: docs-backend # alias for quick access
 docs-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} -f docs/pom.xml clean site:run
+	${MVN} -pl docs clean site:run
 
 .PHONY: lint-backend #: Run linting.
 lint: lint-backend # alias for quick access
@@ -39,7 +39,7 @@ tests-backend:
 run: run-backend # alias for quick access
 run-backend: 
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} -f modules/core clean spring-boot:run
+	${MVN} -pl core clean spring-boot:run
 
 .PHONY: build-backend #: Build backend app.
 build: build-backend # alias for quick access
