@@ -22,7 +22,7 @@ stages:
 
 before_script:
   # TODO: use docker image with make preinstalled.
-  - apt update && apt install build-essential -y
+  - apt update && apt install -y build-essential zip unzip jq
   - echo
   - make help-backend
   - echo
@@ -38,10 +38,14 @@ tests:
   script:
     - make tests-backend
 
-# build:
-#   stage: build
-#   script:
-#     - make build-backend
+build:
+  stage: build
+  script:
+    - make build-backend
+  artifacts:
+    paths:
+      - modules/**/target/*.jar
+    expire_in: 10 minutes
 
 # release:
 #   stage: release
@@ -50,16 +54,25 @@ tests:
 #   only:
 #     - develop
 
-# package:
-#   stage: package
-#   script:
-#     - make package-backend
-#   only:
-#     - develop
+package:
+  stage: package
+  script:
+    - make package-backend
+  dependencies:
+    - build
+  artifacts:
+    paths:
+      - target/*.zip
+    expire_in: 10 minutes
+  only:
+    - develop
+  
 
-# deploy:
-#   stage: deploy
-#   script:
-#     - make deploy-backend
-#   only:
-#     - develop
+deploy:
+  stage: deploy
+  script:
+    - make deploy-backend
+  dependencies:
+    - package
+  only:
+    - develop
