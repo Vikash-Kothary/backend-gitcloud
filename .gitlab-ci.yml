@@ -1,11 +1,6 @@
 ---
 image: maven:3.6.3-jdk-11
 
-variables:
-  ENV: ci
-  CI: "true"
-  MVN: mvn
-
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
