@@ -3,7 +3,7 @@
 SHELL := /bin/bash
 GITCLOUD_BACKEND_PATH := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 GITCLOUD_BACKEND_NAME ?= "Git Cloud"
-GITCLOUD_BACKEND_VERSION ?= 0.1.0
+GITCLOUD_BACKEND_VERSION ?= "v0.1.0"
 GITCLOUD_BACKEND_DESCRIPTION ?= "Manage all your Git repositories, organisations, providers from one place."
 
 ENV ?= local
