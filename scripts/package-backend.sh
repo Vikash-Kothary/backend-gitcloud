@@ -4,7 +4,7 @@
 
 PACKAGE_FOLDER=target
 PACKAGE_NAME=backend-gitcloud
-PACKAGE_VERSION=${GITCLOUD_BACKEND_VERSION}-${GIT_COMMIT_SHORT_SHA}
+PACKAGE_VERSION=${GITCLOUD_BACKEND_VERSION//\"}-${GIT_COMMIT_SHORT_SHA//\"}
 
 # If is a stable release
 if [[ "\"main\"" == "${GIT_BRANCH}" ]]; then
