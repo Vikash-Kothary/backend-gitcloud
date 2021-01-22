@@ -21,7 +21,7 @@ help-backend:
 docs: docs-backend # alias for quick access
 docs-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} -pl docs site:run
+	${MVN} -pl docs site:run ${LOGGER}
 
 .PHONY: lint-backend #: Run linting.
 lint: lint-backend # alias for quick access
@@ -33,49 +33,49 @@ lint-backend:
 tests: tests-backend # alias for quick access
 tests-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} test
+	${MVN} test ${LOGGER}
 
 .PHONY: run-backend #: Run backend app.
 run: run-backend # alias for quick access
 run-backend: 
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} -pl core spring-boot:run
+	${MVN} -pl core spring-boot:run ${LOGGER}
 	
 # Run scripts using make
 %:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
 	if [[ -f "scripts/${*}.sh" ]]; then \
-	${SHELL} "scripts/${*}.sh"; fi
+	${SHELL} "scripts/${*}.sh" ${LOGGER}; fi
 
 .PHONY: init-backend #: Download project dependencies.
 init: init-backend # alias for quick access
 init-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} initialize dependency:go-offline
+	${MVN} initialize dependency:go-offline ${LOGGER}
 
 .PHONY: build-backend #: Build backend app.
 build: build-backend # alias for quick access
 build-backend: 
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} package
+	${MVN} package ${LOGGER}
 
 .PHONY: release-backend
 release: release-backend
 release-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${SHELL} scripts/release-backend.sh
+	${SHELL} scripts/release-backend.sh ${LOGGER}
 
 .PHONY: package-backend
 package: package-backend
 package-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${SHELL} scripts/package-backend.sh
+	${SHELL} scripts/package-backend.sh ${LOGGER}
 
 .PHONY: deploy-backend
 deploy: deploy-backend
 deploy-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${SHELL} scripts/deploy-backend.sh
+	${SHELL} scripts/deploy-backend.sh ${LOGGER}
 
 .PHONY: open-backend
 open: open-backend
@@ -87,4 +87,4 @@ open-backend:
 clean: clean-backend # alias for quick access
 clean-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} clean
+	${MVN} clean ${LOGGER}
