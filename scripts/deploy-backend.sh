@@ -4,15 +4,17 @@
 
 PACKAGE_FOLDER=target
 PACKAGE_NAME=backend-gitcloud
-PACKAGE_VERSION=${GITCLOUD_BACKEND_VERSION}
-PACKAGE_FILENAME=${PACKAGE_NAME}-${PACKAGE_VERSION}.zip
-GITLAB_API_V4_URL=${CI_API_V4_URL}
-GITLAB_PROJECT_ID=${CI_PROJECT_ID}
-GITLAB_AUTH_TOKEN=${CI_JOB_TOKEN}
-GITLAB_GENERIC_PACKAGE_REGISTRY="${GITLAB_API_V4_URL}/projects/${GITLAB_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${PACKAGE_VERSION}/${PACKAGE_FILENAME}"
-[[ ! -z "${GITLAB_AUTH_TYPE}" ]] || GITLAB_AUTH_TYPE=JOB-TOKEN
+PACKAGE_VERSION=${GITCLOUD_BACKEND_VERSION//\"}-${GIT_COMMIT_SHORT_SHA//\"}
 
-echo "Deploying package to Gitlab Packages"
+# If is a stable release
+if [[ "\"main\"" == "${GIT_BRANCH}" ]]; then
+	PACKAGE_VERSION=${GITCLOUD_BACKEND_VERSION//\"}
+fi
+
+PACKAGE_FILENAME=${PACKAGE_NAME}-${PACKAGE_VERSION}.zip
+PACKAGE_REGISTRY="${GITLAB_API_V4_URL}/projects/${GITLAB_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${PACKAGE_VERSION}/${PACKAGE_FILENAME}"
+
+echo "Deploying package to Gitlab Packages: ${PACKAGE_REGISTRY}"
 
 if [[ ! -f "${PACKAGE_FOLDER}/${PACKAGE_FILENAME}" ]]; then
 	echo "--- Package not found."
@@ -25,7 +27,7 @@ echo "--- Uploading to Gitlab Generic Package "
 RESPONSE=$(curl \
 --header "${GITLAB_AUTH_TYPE}: ${GITLAB_AUTH_TOKEN}" \
 --upload-file "${PACKAGE_FOLDER}/${PACKAGE_FILENAME}" \
-${GITLAB_GENERIC_PACKAGE_REGISTRY} \
+${PACKAGE_REGISTRY} \
 --progress-bar)
 
 # If doesn't return 201
