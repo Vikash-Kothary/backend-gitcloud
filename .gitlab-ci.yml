@@ -9,6 +9,7 @@ cache:
 
 stages:
   - clean
+  - init
   - lint
   - tests
   - build
@@ -21,8 +22,11 @@ before_script:
   - apt update && apt install -y build-essential zip unzip jq
   - echo
   - make help-backend
-  - echo
-  - make init-backend
+
+init:
+  stage: init
+  script:
+    - make init-backend
 
 # lint:
 #   stage: lint
