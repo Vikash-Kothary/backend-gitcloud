@@ -1,10 +1,11 @@
 ---
 image: maven:3.6.3-jdk-11
 
+# Only caches files inside repo
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - ~/.m2
+    - .m2/repository
 
 stages:
   - clean
