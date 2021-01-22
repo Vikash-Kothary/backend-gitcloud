@@ -39,7 +39,7 @@ tests-backend:
 run: run-backend # alias for quick access
 run-backend: 
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${MVN} -pl core spring-boot:run ${LOGGER}
+	${MVN} -pl modules/core spring-boot:run ${LOGGER}
 	
 # Run scripts using make
 %:
