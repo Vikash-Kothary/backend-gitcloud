@@ -45,7 +45,7 @@ run-backend:
 %:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
 	if [[ -f "scripts/${*}.sh" ]]; then \
-	${SHELL} "scripts/${*}.sh" ${LOGGER}; fi
+	${BASH} "scripts/${*}.sh" ${LOGGER}; fi
 
 .PHONY: init-backend #: Download project dependencies.
 init: init-backend # alias for quick access
@@ -63,19 +63,19 @@ build-backend:
 release: release-backend
 release-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${SHELL} scripts/release-backend.sh ${LOGGER}
+	${BASH} scripts/release-backend.sh ${LOGGER}
 
 .PHONY: package-backend
 package: package-backend
 package-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${SHELL} scripts/package-backend.sh ${LOGGER}
+	${BASH} scripts/package-backend.sh ${LOGGER}
 
 .PHONY: deploy-backend
 deploy: deploy-backend
 deploy-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${SHELL} scripts/deploy-backend.sh ${LOGGER}
+	${BASH} scripts/deploy-backend.sh ${LOGGER}
 
 .PHONY: open-backend
 open: open-backend
