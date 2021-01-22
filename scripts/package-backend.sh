@@ -12,7 +12,7 @@ if [[ "\"main\"" == "${GIT_BRANCH}" ]]; then
 fi
 
 PACKAGE_FILENAME=${PACKAGE_NAME}-${PACKAGE_VERSION}.zip
-PACKAGE_JAR=modules/core/target/gitcloud-core-${PACKAGE_VERSION}.jar
+PACKAGE_JAR=$(find modules/core -name *.jar)
 
 echo "Building release package."
 
