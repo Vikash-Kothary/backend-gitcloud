@@ -15,7 +15,7 @@ export
 .PHONY: help-backend #: List available command.
 help: help-backend # alias for quick access
 help-backend:
-	@awk 'BEGIN {FS = " ?#?: "; print ""$(GITCLOUD_BACKEND_NAME)" "$(GITCLOUD_BACKEND_VERSION)"\n"$(GITCLOUD_BACKEND_DESCRIPTION)"\n\nUsage: make \033[36m<command>\033[0m\n\nCommands:"} /^.PHONY: ?[a-zA-Z_-]/ { printf "  \033[36m%-10s\033[0m %s\n", $$2, $$3 }' $(MAKEFILE_LIST)
+	@cd ${GITCLOUD_BACKEND_PATH} && awk 'BEGIN {FS = " ?#?: "; print ""$(GITCLOUD_BACKEND_NAME)" "$(GITCLOUD_BACKEND_VERSION)"\n"$(GITCLOUD_BACKEND_DESCRIPTION)"\n\nUsage: make \033[36m<command>\033[0m\n\nCommands:"} /^.PHONY: ?[a-zA-Z_-]/ { printf "  \033[36m%-10s\033[0m %s\n", $$2, $$3 }' $(MAKEFILE_LIST)
 
 .PHONY: docs-backend #: Run documentation.
 docs: docs-backend # alias for quick access
