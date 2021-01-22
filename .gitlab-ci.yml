@@ -68,6 +68,8 @@ deploy:
   stage: deploy
   script:
     - make deploy-backend
+    - echo
+    - make open-backend
   dependencies:
     - package
   only:

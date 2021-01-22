@@ -81,7 +81,7 @@ deploy-backend:
 open: open-backend
 open-backend:
 	@cd ${GITCLOUD_BACKEND_PATH} && \
-	${OPEN} ${GITCLOUD_URL}
+	${OPEN} ${GITCLOUD_BACKEND_URL}
 
 .PHONY: clean-backend #: Clean project build files.
 clean: clean-backend # alias for quick access
