@@ -12,7 +12,7 @@ if [[ "\"main\"" == "${GIT_BRANCH}" ]]; then
 fi
 
 PACKAGE_FILENAME=${PACKAGE_NAME}-${PACKAGE_VERSION}.zip
-PACKAGE_REGISTRY="${GITLAB_API_V4_URL}/projects/${GITLAB_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${PACKAGE_VERSION}/${PACKAGE_FILENAME}"
+PACKAGE_REGISTRY="${GITLAB_API_V4_URL}/projects/${GITLAB_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${GITCLOUD_BACKEND_VERSION//\"}/${PACKAGE_FILENAME}"
 
 echo "Deploying package to Gitlab Packages: ${PACKAGE_REGISTRY}"
 
@@ -32,7 +32,7 @@ ${PACKAGE_REGISTRY} \
 
 # If doesn't return 201
 if [[ -z `echo ${RESPONSE} | jq .message | grep '201'` ]]; then
-	echo "Upload failed: `echo ${RESPONSE} | jq .message`"
+	echo "Upload failed: ${RESPONSE}"
 	exit 1
 else
 	echo "Package Upload Successful: `echo ${RESPONSE} | jq .message`"
